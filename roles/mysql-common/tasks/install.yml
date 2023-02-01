@@ -1,0 +1,8 @@
+- name: INSTALL - install mysql repo rpm
+  shell: yum localinstall https://dev.mysql.com/get/{{ mysql_rpm_file_name }} -y
+  when: "'mysqld.service' not in services"
+- name: INSTALL - install mysql server
+  yum:
+    name: mysql-community-server
+    state: present
+  notify: initialize data dir

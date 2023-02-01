@@ -1,0 +1,23 @@
+---
+- name: MYSQL - ensure mysql_server_id
+  fail:
+    msg: mysql_server_id is required
+  when: mysql_server_id is undefined
+- name: MYSQL - copy mysqld config
+  template:
+    src: mysqld.cnf.j2
+    dest: /etc/my.cnf
+    owner: root
+    group: root
+    mode: '0644'
+  register: mysqld_config_result
+- name: MYSQL - restart mysqld
+  systemd:
+    name: mysqld
+    enabled: yes
+    state: restarted
+  when: mysqld_config_result.changed
+- name: MYSQL - mysql root
+  import_role:
+    name: mysql-common
+    tasks_from: mysql_root

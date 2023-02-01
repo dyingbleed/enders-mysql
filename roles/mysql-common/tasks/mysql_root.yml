@@ -1,0 +1,13 @@
+- name: MYSQL ROOT - ensure mysql_root_password
+  fail:
+    msg: mysql_root_password is required
+  when: mysql_root_password is undefined
+- name: MYSQL ROOT - set mysql root password
+  shell: "mysql -uroot -e\"SET PASSWORD = '{{ mysql_root_password }}'\""
+- name: MYSQL ROOT - copy mysql root config
+  template:
+    src: root.cnf.j2
+    dest: /root/.my.cnf
+    owner: root
+    group: root
+    mode: '0644'

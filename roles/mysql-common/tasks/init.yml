@@ -1,0 +1,5 @@
+- name: INIT - get service facts
+  service_facts:
+- name: INIT - disable selinux
+  selinux:
+    state: disabled

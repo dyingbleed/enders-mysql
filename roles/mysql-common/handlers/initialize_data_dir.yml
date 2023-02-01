@@ -1,0 +1,9 @@
+- name: MYSQL COMMON - ensure data dir
+  file:
+    path: "{{ mysql_datadir }}"
+    state: directory
+    owner: mysql
+    group: mysql
+    mode: '0755'
+- name: MYSQL COMMON - initailize data dir
+  shell: "mysqld --initialize-insecure --datadir={{ mysql_datadir }} --user=mysql"

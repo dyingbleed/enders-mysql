@@ -1,0 +1,5 @@
+- name: deploy mysql
+  hosts: mysql
+  become: True
+  roles:
+    - mysql

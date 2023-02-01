@@ -1,0 +1,2 @@
+[mysql]
+mysql1 ansible_host=127.0.0.1 ansible_port=2222 mysql_server_id=1

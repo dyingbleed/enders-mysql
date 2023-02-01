@@ -1,0 +1,3 @@
+---
+mysql_rpm_file_name: mysql80-community-release-el7-7.noarch.rpm
+mysql_datadir: /data/mysql
