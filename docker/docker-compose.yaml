@@ -1,0 +1,39 @@
+version: '3'
+services:
+  mysql1:
+    image: bitnami/mysql:8.0.32
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_AUTHENTICATION_PLUGIN=mysql_native_password
+      - MYSQL_REPLICATION_MODE=master
+      - MYSQL_REPLICATION_USER=repl
+      - MYSQL_REPLICATION_PASSWORD=repl
+    ports:
+      - 3306:3306
+  mysql2:
+    image: bitnami/mysql:8.0.32
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_AUTHENTICATION_PLUGIN=mysql_native_password
+      - MYSQL_MASTER_HOST=mysql1
+      - MYSQL_MASTER_PORT_NUMBER=3306
+      - MYSQL_MASTER_ROOT_PASSWORD=root
+      - MYSQL_REPLICATION_MODE=slave
+      - MYSQL_REPLICATION_USER=repl
+      - MYSQL_REPLICATION_PASSWORD=repl
+    ports:
+      - 3307:3306
+  mysql3:
+    image: bitnami/mysql:8.0.32
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_AUTHENTICATION_PLUGIN=mysql_native_password
+      - MYSQL_MASTER_HOST=mysql1
+      - MYSQL_MASTER_PORT_NUMBER=3306
+      - MYSQL_MASTER_ROOT_PASSWORD=root
+      - MYSQL_REPLICATION_MODE=slave
+      - MYSQL_REPLICATION_USER=repl
+      - MYSQL_REPLICATION_PASSWORD=repl
+    ports:
+      - 3308:3306
+  
